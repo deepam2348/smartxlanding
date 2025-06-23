@@ -2,7 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 
 const logos = [
-  { name: "NSE", color: "#D09D42" },
+
   { name: "Zerodha", color: "#1E808D" },
   { name: "Binance", color: "#F3BA2F" },
   { name: "TradingView", color: "#2962FF" },

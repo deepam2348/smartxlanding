@@ -6,10 +6,12 @@ import SystemStats from "../components/SystemStats";
 import TestimonialsSection from "../components/TestimonialsSection";
 import StrategyCarousel from "../components/StrategyCarousel";
 import CallToAction from "../components/CallToAction";
+import TickerTape from "../components/TickerTape";
 export default function Home() {
   return (
     <>
       <HeroSection />
+      <TickerTape />
       <PartnerLogos />
       <AboutAlgoTrade />
       <HowItWorks />

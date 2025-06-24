@@ -2,7 +2,7 @@ import React from "react";
 
 export default function Pricing() {
   return (
-    <section className="min-h-screen bg-dark text-light p-10">
+    <section className="min-h-screen bg-dark text-light pt-32 px-6 pb-10">
       <div className="text-center mb-12">
         <h2 className="text-4xl font-bold text-gold mb-4">Our Pricing Plans</h2>
         <p className="text-gray-300 max-w-xl mx-auto">

@@ -76,7 +76,7 @@ export default function Features() {
   return (
     <>
       {/* FEATURES SECTION */}
-      <section className="min-h-screen bg-[#0a0a0a] text-white py-20 px-6">
+      <section className="min-h-screen bg-[#0a0a0a] text-white pt-32 pb-20 px-6">
         <div className="text-center mb-12">
           <h2 className="text-4xl font-bold text-[#D09D42] mb-4">Key Features</h2>
           <p className="text-gray-300 max-w-xl mx-auto">

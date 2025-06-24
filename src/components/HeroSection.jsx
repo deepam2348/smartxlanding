@@ -13,11 +13,11 @@ export default function HeroSection() {
 
       <div className="relative z-10">
         <h1 className="text-5xl md:text-6xl font-extrabold leading-tight mb-6">
-          Automate Your Trades <br />
-          <span className="text-gold">Maximize Your Profits</span>
+          Built by Traders Enhanced by AI <br />
+          <span className="text-gold">Designed for You</span>
         </h1>
         <p className="text-lg text-gray-300 max-w-xl mx-auto mb-8">
-          AI-driven algorithmic trading made easy. No coding required. Backtest, deploy, and grow your capital — all in one place.
+         You're not just automating trades—you’re upgrading your entire trading experience. Let SmartXAlgo handle the heavy lifting, so you can focus on smart decisions, not signals.
         </p>
         <div className="flex justify-center gap-4 flex-wrap">
           <Link

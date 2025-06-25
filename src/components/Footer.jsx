@@ -42,7 +42,7 @@ export default function Footer() {
 
       {/* Bottom Line */}
       <div className="mt-6 text-center text-xs text-gray-500">
-        © {new Date().getFullYear()} SmartXalgo. All rights reserved.
+        © {new Date().getFullYear()} MotionsX India. All rights reserved.
       </div>
     </footer>
   );

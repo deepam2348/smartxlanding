@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { motion } from "framer-motion";
-//import Bigbull from "../assets/images/bigbull.avif"
+import bigBull from "../assets/images/smartlogo2.svg";
+
 export default function ForgotPassword() {
   const navigate = useNavigate();
   const [step, setStep] = useState(1);
@@ -61,41 +61,31 @@ export default function ForgotPassword() {
   };
 
   return (
-    <div className="flex min-h-screen bg-[#1a1a1a] text-white">
-      {/* Left Panel - BigBull Image */}
-      <div className="hidden md:flex w-1/2 justify-center items-center p-8">
-        <motion.img
-          src="/Bigbull.avif" // ✅ if placed in /public folder
-          alt="BigBull"
-          className="w-96 h-auto rounded-lg shadow-lg"
-          initial={{ x: -50, opacity: 0 }}
-          animate={{ x: 0, opacity: 1 }}
-          transition={{ duration: 0.8 }}
-        />
+    <div className="min-h-screen grid grid-cols-1 md:grid-cols-2 bg-[#1a1a1a] text-white">
+      {/* Left Panel */}
+      <div className="flex flex-col justify-center items-center bg-[#1a1a1a] p-8 animate-fade-in">
+        <img src={bigBull} alt="SmartX Logo" className="w-72 h-72 mb-6 animate-spin-slow" />
+        <h2 className="text-3xl font-bold text-[#D09D42] mb-2">Reset Your Password</h2>
+        <p className="text-center text-gray-300 max-w-sm">
+          Don’t worry! We’ll help you recover access to your SmartX account.
+        </p>
       </div>
 
-      {/* Right Panel - Forgot Password Form */}
-      <div className="flex flex-col justify-center items-center w-full md:w-1/2 px-4 pt-24 pb-8">
-        <motion.div
-          className="w-full max-w-md"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-        >
-          <h1 className="text-3xl font-bold mb-6 text-center text-[#D09D42]">
+      {/* Right Panel */}
+      <div className="flex items-center justify-center p-10 bg-[#262626]">
+        <div className="w-full max-w-md">
+          <h1 className="text-3xl font-bold text-center mb-6 text-[#D09D42]">
             Forgot Password
           </h1>
-          <form
-            onSubmit={step === 1 ? sendOtp : resetPassword}
-            className="space-y-4"
-          >
+
+          <form onSubmit={step === 1 ? sendOtp : resetPassword} className="space-y-4">
             <input
               type="email"
-              placeholder="Enter your email"
+              placeholder="Email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              className="w-full px-4 py-2 rounded bg-[#2a2a2a] text-white border border-[#D09D42] placeholder-gray-400"
+              className="w-full px-4 py-2 bg-[#1f1f1f] border border-gray-700 rounded focus:outline-none focus:ring-2 focus:ring-[#D09D42]"
             />
 
             {step === 2 && (
@@ -106,7 +96,7 @@ export default function ForgotPassword() {
                   value={otp}
                   onChange={(e) => setOtp(e.target.value)}
                   required
-                  className="w-full px-4 py-2 rounded bg-[#2a2a2a] text-white border border-[#D09D42] placeholder-gray-400"
+                  className="w-full px-4 py-2 bg-[#1f1f1f] border border-gray-700 rounded focus:outline-none focus:ring-2 focus:ring-[#D09D42]"
                 />
                 <input
                   type="password"
@@ -114,7 +104,7 @@ export default function ForgotPassword() {
                   value={newPassword}
                   onChange={(e) => setNewPassword(e.target.value)}
                   required
-                  className="w-full px-4 py-2 rounded bg-[#2a2a2a] text-white border border-[#D09D42] placeholder-gray-400"
+                  className="w-full px-4 py-2 bg-[#1f1f1f] border border-gray-700 rounded focus:outline-none focus:ring-2 focus:ring-[#D09D42]"
                 />
                 <input
                   type="password"
@@ -122,19 +112,30 @@ export default function ForgotPassword() {
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
                   required
-                  className="w-full px-4 py-2 rounded bg-[#2a2a2a] text-white border border-[#D09D42] placeholder-gray-400"
+                  className="w-full px-4 py-2 bg-[#1f1f1f] border border-gray-700 rounded focus:outline-none focus:ring-2 focus:ring-[#D09D42]"
                 />
               </>
             )}
 
             <button
               type="submit"
-              className="w-full py-2 rounded bg-[#D09D42] text-[#1a1a1a] font-semibold hover:bg-yellow-600 transition duration-300"
+              className="w-full bg-[#D09D42] hover:bg-[#c28c2c] text-black font-semibold py-2 rounded transition duration-200"
             >
               {step === 1 ? "Send OTP" : "Reset Password"}
             </button>
           </form>
-        </motion.div>
+
+          <p className="mt-6 text-sm text-center text-gray-400">
+            Back to{" "}
+            <button
+              type="button"
+              onClick={() => navigate("/signup")}
+              className="text-[#D09D42] hover:underline"
+            >
+              Login
+            </button>
+          </p>
+        </div>
       </div>
     </div>
   );

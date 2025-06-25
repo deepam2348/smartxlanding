@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import bigBull from "../assets/images/smartlogo2.svg";
 
+const API_BASE = process.env.REACT_APP_API_BASE_URL;
+
 export default function ForgotPassword() {
   const navigate = useNavigate();
   const [step, setStep] = useState(1);
@@ -13,7 +15,7 @@ export default function ForgotPassword() {
   const sendOtp = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch("http://localhost:4000/api/auth/send-reset-otp", {
+      const res = await fetch(`${API_BASE}/api/auth/send-reset-otp`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email }),
@@ -38,7 +40,7 @@ export default function ForgotPassword() {
     }
 
     try {
-      const res = await fetch("http://localhost:4000/api/auth/reset-password", {
+      const res = await fetch(`${API_BASE}/api/auth/reset-password`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, otp, newPassword }),

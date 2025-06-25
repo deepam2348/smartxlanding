@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import bigbull from "../assets/images/smartlogo2.svg";
 
+const API_BASE = process.env.REACT_APP_API_BASE_URL;
+
 export default function Signup() {
   const [form, setForm] = useState({ name: "", email: "", phone: "", password: "" });
   const [step, setStep] = useState("register");
@@ -40,7 +42,7 @@ export default function Signup() {
 
   const checkDuplicate = async () => {
     try {
-      const res = await fetch("http://localhost:4000/api/auth/check-user", {
+      const res = await fetch(`${API_BASE}/api/auth/check-user`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email: form.email, phone: form.phone }),
@@ -63,7 +65,7 @@ export default function Signup() {
     if (isDuplicate) return;
 
     try {
-      const res = await fetch("http://localhost:4000/api/auth/temp-register", {
+      const res = await fetch(`${API_BASE}/api/auth/temp-register`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
@@ -97,7 +99,7 @@ export default function Signup() {
     }
 
     try {
-      const res = await fetch("http://localhost:4000/api/auth/final-register", {
+      const res = await fetch(`${API_BASE}/api/auth/final-register`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
@@ -127,7 +129,7 @@ export default function Signup() {
 
   const handleResendOtp = async () => {
     try {
-      const res = await fetch("http://localhost:4000/api/auth/temp-register", {
+      const res = await fetch(`${API_BASE}/api/auth/temp-register`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
@@ -147,7 +149,7 @@ export default function Signup() {
   };
 
   const handleGoogleSignup = () => {
-    window.location.href = "http://localhost:4000/api/auth/google"; // 🔗 Connects to Google OAuth backend
+    window.location.href = `${API_BASE}/api/auth/google`;
   };
 
   return (

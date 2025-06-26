@@ -12,6 +12,10 @@ export default function ForgotPassword() {
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
+  // Password rule regex
+  const passwordRegex =
+    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]).{8,}$/;
+
   const sendOtp = async (e) => {
     e.preventDefault();
     try {
@@ -34,8 +38,16 @@ export default function ForgotPassword() {
 
   const resetPassword = async (e) => {
     e.preventDefault();
+
     if (newPassword !== confirmPassword) {
       alert("❌ Passwords do not match");
+      return;
+    }
+
+    if (!passwordRegex.test(newPassword)) {
+      alert(
+        "❌ Password must be at least 8 characters long and include uppercase, lowercase, number, and special character."
+      );
       return;
     }
 
@@ -131,7 +143,7 @@ export default function ForgotPassword() {
             Back to{" "}
             <button
               type="button"
-              onClick={() => navigate("/signup")}
+              onClick={() => navigate("/signin")}
               className="text-[#D09D42] hover:underline"
             >
               Login

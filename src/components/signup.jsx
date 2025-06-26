@@ -12,6 +12,7 @@ export default function Signup() {
   const [timeLeft, setTimeLeft] = useState(60);
   const [canResend, setCanResend] = useState(false);
   const [otpExpired, setOtpExpired] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const timerRef = useRef(null);
   const navigate = useNavigate();
@@ -40,6 +41,9 @@ export default function Signup() {
     return () => timerRef.current && clearInterval(timerRef.current);
   }, [step]);
 
+  const validatePassword = (password) =>
+    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]).{8,}$/.test(password);
+
   const checkDuplicate = async () => {
     try {
       const res = await fetch(`${API_BASE}/api/auth/check-user`, {
@@ -63,6 +67,13 @@ export default function Signup() {
     e.preventDefault();
     const isDuplicate = await checkDuplicate();
     if (isDuplicate) return;
+
+    if (!validatePassword(form.password)) {
+      alert(
+        "Password must be at least 8 characters and include uppercase, lowercase, number, and special character."
+      );
+      return;
+    }
 
     try {
       const res = await fetch(`${API_BASE}/api/auth/temp-register`, {
@@ -124,6 +135,9 @@ export default function Signup() {
     if (value && index < 5) {
       const next = document.getElementById(`otp-${index + 1}`);
       next?.focus();
+    } else if (!value && index > 0) {
+      const prev = document.getElementById(`otp-${index - 1}`);
+      prev?.focus();
     }
   };
 
@@ -173,18 +187,36 @@ export default function Signup() {
           <form onSubmit={step === "register" ? handleRegister : handleVerifyOtp} className="space-y-4">
             {step === "register" ? (
               <>
-                {["name", "email", "phone", "password"].map((field) => (
+                {["name", "email", "phone"].map((field) => (
                   <input
                     key={field}
                     name={field}
                     placeholder={field.charAt(0).toUpperCase() + field.slice(1)}
-                    type={field === "email" ? "email" : field === "password" ? "password" : "text"}
+                    type={field === "email" ? "email" : "text"}
                     value={form[field]}
                     onChange={(e) => setForm({ ...form, [field]: e.target.value })}
                     required
                     className="w-full px-4 py-2 bg-[#1f1f1f] border border-gray-700 rounded focus:outline-none focus:ring-2 focus:ring-[#D09D42]"
                   />
                 ))}
+                <div className="relative">
+                  <input
+                    name="password"
+                    placeholder="Password"
+                    type={showPassword ? "text" : "password"}
+                    value={form.password}
+                    onChange={(e) => setForm({ ...form, password: e.target.value })}
+                    required
+                    className="w-full px-4 py-2 bg-[#1f1f1f] border border-gray-700 rounded focus:outline-none focus:ring-2 focus:ring-[#D09D42]"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword((prev) => !prev)}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-sm text-[#D09D42]"
+                  >
+                    {showPassword ? "Hide" : "Show"}
+                  </button>
+                </div>
               </>
             ) : (
               <>
